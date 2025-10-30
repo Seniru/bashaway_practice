@@ -1,3 +1,7 @@
+# Github Actions Reference
+
+https://docs.github.com/en/actions/reference
+
 # Bash Functional Utilities Cheatsheet
 
 ---
@@ -92,3 +96,15 @@ s/echo $sum  # 10
 
 ---
 
+# 7. Process management
+
+- `ps aux` - List processes
+- Running a command with & will make it run in background
+  eg: `sleep 100 &`
+- `pstree -p` shows a cool tree view of all processes
+- `jobs -l` - List all the jobs started by the current session
+- `top` - Real-time interactive process monitoring
+- `kill <PID>` - Gracefully terminate process |
+- `kill -9 <PID>` - Forcefully terminate process (SIGKILL) |
+- `pkill <process_name>` - Kill processes by name |
+- `killall <process_name>` - Kill all processes with a specific name |
