@@ -1,4 +1,9 @@
-FROM nginx:mainline-alpine
-COPY index.html /www/html/index.html
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
+FROM node:16-buster-slim
+
+COPY package*.json ./
+RUN npm i
+COPY server.js ./
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
