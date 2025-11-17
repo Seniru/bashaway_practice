@@ -6,11 +6,21 @@ services:
     volumes:
     - ./nginx.conf:/etc/nginx/nginx.conf:ro
     - ./index.html:/www/html/index.html
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - backend
 
-  backend:
+  backend1:
     build: .
-    ports:
-      - 3000:3000
+    networks:
+      - backend
+
+  backend2:
+    build: .
+    networks:
+      - backend
 
 networks:
   backend:

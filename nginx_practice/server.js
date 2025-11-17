@@ -1,4 +1,5 @@
 const express = require("express")
+const os = require("os")
 const app = express()
 
 app.use((req, res, next) => {
@@ -8,7 +9,8 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res, next) => {
     res.json({
-        message: "Hello world"
+        message: "Hello world",
+        hostname: os.hostname()
     })
 })
 
