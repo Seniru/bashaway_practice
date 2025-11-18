@@ -22,5 +22,9 @@ services:
     networks:
       - backend
 
+  # or simply, just do
+  # backend: ...
+  # and run `docker compose up --scale backend=n`
+
 networks:
   backend:
