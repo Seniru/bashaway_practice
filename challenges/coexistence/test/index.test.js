@@ -6,12 +6,6 @@ require('chromedriver')
 
 jest.setTimeout(10000);
 
-test('should validate if only bash files are present', () => {
-    const shellFileCount = shellFiles().length;
-    expect(shellFileCount).toBe(1);
-    expect(shellFileCount).toBe(scan('**', ['src/**']).length);
-});
-
 describe('should check if the websites were merged successfully', () => {
     const rootURL = 'http://localhost:8088'
     

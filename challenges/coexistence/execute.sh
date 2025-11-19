@@ -58,7 +58,7 @@ EOF
 
 docker run -d \
     --network host \
-    -v "$(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro" \
+    -v "./nginx.conf:/etc/nginx/nginx.conf:ro" \
     nginx:mainline-alpine
 
 # cleanup
