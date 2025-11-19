@@ -1,0 +1,48 @@
+name: unit-tests
+on:
+  push:
+jobs:
+  unit-tests:
+    strategy:
+      max-parallel: 1
+      matrix:
+        go-version: ['1.21.0', '1.22.0']
+        include:
+          - go-version: '1.21.0'
+            mongo-port: 27017
+          - go-version: '1.22.0'
+            mongo-port: 27018
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install CA certificates
+        run: |
+          sed -i -e 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list
+          apt-get update -o Acquire::Check-Valid-Until=false
+          apt-get install -y ca-certificates
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.12.1
+        with:
+          mongodb-version: latest
+          mongodb-db: elemental
+          mongodb-port: ${{ matrix.mongo-port }}
+          mongodb-replica-set: 'rs0'
+          mongodb-container-name: mongodb-${{ matrix.go-version }}
+
+    
+      - uses: actions/setup-go@v6
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: download dependencies
+        run: |
+          export GOINSECURE=*.golang.org
+          go mod download
+
+      - name: run tests
+        run: go test ./tests/... -v
+        env:
+          DB_URI: mongodb://localhost:${{ matrix.mongo-port }}/elemental?repliceSet=rs0
+
