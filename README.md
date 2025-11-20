@@ -108,3 +108,57 @@ s/echo $sum  # 10
 - `kill -9 <PID>` - Forcefully terminate process (SIGKILL) |
 - `pkill <process_name>` - Kill processes by name |
 - `killall <process_name>` - Kill all processes with a specific name |
+
+# Bash Parameter Expansion Cheatsheet
+
+## Basic
+- `${var}` — value of variable
+- `${#var}` — length of variable (in characters)
+
+## Substrings
+- `${var:offset}` — substring from offset
+- `${var:offset:length}` — substring of given length
+
+## Pattern Removal (globs, not regex)
+- `${var#pattern}` — remove shortest match of pattern from start
+- `${var##pattern}` — remove longest match of pattern from start
+- `${var%pattern}` — remove shortest match of pattern from end
+- `${var%%pattern}` — remove longest match of pattern from end
+
+## Pattern Replacement
+- `${var/pat/repl}` — replace first match of pat with repl
+- `${var//pat/repl}` — replace all matches
+- `${var/#pat/repl}` — replace pat at start
+- `${var/%pat/repl}` — replace pat at end
+
+## Default / Assign / Test
+- `${var:-word}` — use word if var is unset or null
+- `${var-word}` — use word if var is unset
+- `${var:=word}` — assign word if var is unset or null
+- `${var=word}` — assign word if var is unset
+- `${var:+word}` — use word if var is set and non-null
+- `${var+word}` — use word if var is set
+- `${var:?msg}` — error with msg if var is unset or null
+- `${var?msg}` — error with msg if var is unset
+
+## Case Modification (bash)
+- `${var^}` — uppercase first character
+- `${var^^}` — uppercase all characters
+- `${var,}` — lowercase first character
+- `${var,,}` — lowercase all characters
+
+## Indirection
+- `${!name}` — value of variable whose name is in name
+- `${!prefix*}` — variable names starting with prefix
+- `${!prefix@}` — variable names starting with prefix
+
+## Arrays
+- `${arr[@]}` — all elements
+- `${arr[*]}` — all elements (word-split difference)
+- `${#arr[@]}` — number of elements
+- `${arr[@]:offset:length}` — subarray slice
+- `${!arr[@]}` — array indices
+
+## Misc
+- `${var^^pattern}` — uppercase only chars matching pattern
+- `${var,,pattern}` — lowercase only chars matching pattern
