@@ -162,3 +162,9 @@ s/echo $sum  # 10
 ## Misc
 - `${var^^pattern}` — uppercase only chars matching pattern
 - `${var,,pattern}` — lowercase only chars matching pattern
+
+# Kubernetes references
+
+https://kubernetes.io/docs/reference/kubectl
+https://kubernetes.io/docs/reference/kubectl/generated/kubectl/
+https://minikube.sigs.k8s.io/docs/commands/service/
