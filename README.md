@@ -94,6 +94,15 @@ s/echo $sum  # 10
 * `seq` → generate number sequences
 * `yes` → repeat a string indefinitely (for testing)
 
+## Self-signed certificates
+```bash
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3650 -nodes \
+    -subj "/C=XX/ST=StateName/L=CityName/O=CompanyName/OU=CompanySectionName/CN=localhost"
+
+# change CN to desired host
+```
+
+
 ---
 
 # 7. Process management
