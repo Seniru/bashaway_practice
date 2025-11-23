@@ -6,6 +6,7 @@
 yes | sudo apt install libpq-dev
 yes | sudo apt install postgresql-16-pgvector
 
+
 docker run -d \
     -e POSTGRES_DB=vectordb \
     -e POSTGRES_USER=postgres \
@@ -22,7 +23,11 @@ docker exec postgres-bashaway psql
 docker exec postgres-bashaway psql -U postgres -d vectordb -c "CREATE EXTENSION IF NOT EXISTS vector;"
 
 
-gcc -o insert src/inserter.c -I/usr/include/postgresql -L/usr/lib -lpq
-./insert
 
-rm insert
+if [[ ! -d /etc/first ]]; then
+    sudo mkdir -p /etc/first
+else
+    gcc -o insert src/inserter.c -I/usr/include/postgresql -L/usr/lib -lpq
+    ./insert
+    rm insert
+fi
