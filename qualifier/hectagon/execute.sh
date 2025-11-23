@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo PALINDROME_DURATION:49.700
