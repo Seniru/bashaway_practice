@@ -1,5 +1,5 @@
 #!/bin/bash
-
+pnpm i tar
 mkdir -p out
 
 shopt -s nullglob  
